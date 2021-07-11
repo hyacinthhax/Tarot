@@ -16,15 +16,31 @@ def run():
         if int(game) == 1:
             os.system('cls' if os.name == 'nt' else 'clear')
             print("Shuffling... ")
-            time.sleep(10)
-            print(question)
+            time.sleep(5)
+            print("Your Question For The Universe: " + question + '\n')
             print(file[randnum])
             input("Enter to Continue... ")
             os.system('cls' if os.name == 'nt' else 'clear')
             run()
 
         elif int(game) == 2:
-            pass
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("Shuffling... ")
+            time.sleep(5)
+            print("Your Question For The Universe: " + question + '\n')
+            randnum2 = random.randint(1, 22)
+            if randnum2 == randnum:
+                randnum2 = random.randint(1, 22)
+            randnum3 = random.randint(1, 22)
+            if randnum3 == randnum or randnum3 == randnum2:
+                randnum3 = random.randint(1, 22)
+
+            print("Past: " + file[randnum])
+            print("Present: " + file[randnum2])
+            print("Future: " + file[randnum3])
+            input("Enter to Continue... ")
+            os.system('cls' if os.name == 'nt' else 'clear')
+            run()
 
         elif int(game) == 3:
             pass
