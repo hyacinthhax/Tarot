@@ -15,9 +15,9 @@ def run():
 
         if int(game) == 1:
             os.system('cls' if os.name == 'nt' else 'clear')
-            print("Shuffling... ")
-            time.sleep(5)
             print("Your Question For The Universe: " + question + '\n')
+            print("Shuffling Deck... ")
+            time.sleep(5)
             print(file[randnum])
             input("Enter to Continue... ")
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -25,9 +25,9 @@ def run():
 
         elif int(game) == 2:
             os.system('cls' if os.name == 'nt' else 'clear')
-            print("Shuffling... ")
-            time.sleep(5)
             print("Your Question For The Universe: " + question + '\n')
+            print("Shuffling Deck... ")
+            time.sleep(5)
             randnum2 = random.randint(1, 22)
             if randnum2 == randnum:
                 randnum2 = random.randint(1, 22)
@@ -43,7 +43,7 @@ def run():
             run()
 
         elif int(game) == 3:
-            pass
+            run()
 
 
 run()
