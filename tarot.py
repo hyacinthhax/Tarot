@@ -1,147 +1,155 @@
-import random
-import time
 import os
+import time
+import random
 
-mycards = []
-file = []
-with open("tarotcards.txt") as f:
-        for line in f.readlines():
-            file.append(line)
 
-def check(game):
-    if int(game) == 1:
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print("Your Question For The Universe: " + question + '\n')
-        print("Shuffling Deck... ")
-        time.sleep(5)
-        print(file[randnum])
-        input("Enter to Continue... ")
-        os.system('cls' if os.name == 'nt' else 'clear')
-        run()
+class App:
+    def __init__(self):
+        self.mycards = []
+        self.file = []
+        with open("tarotcards.txt") as f:
+            for line in f.readlines():
+                self.file.append(line)
 
-    elif int(game) == 2:
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print("Your Question For The Universe: " + question + '\n')
-        print("Shuffling Deck... ")
-        time.sleep(5)
-        randnum2 = random.randint(1, 22)
-        if randnum2 == randnum:
-            randnum2 = random.randint(1, 22)
-            randnum3 = random.randint(1, 22)
-        if randnum3 == randnum or randnum3 == randnum2:
-            randnum3 = random.randint(1, 22)
+    def check(self, game):
+        if int(game) == 1:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("Your Question For The Universe: " + self.question + '\n')
+            print("Shuffling Deck... ")
+            time.sleep(5)
+            print(self.file[self.randnum])
+            input("Enter to Continue... ")
+            os.system('cls' if os.name == 'nt' else 'clear')
+            self.run()
 
-        print("Past: " + file[randnum])
-        print("Present: " + file[randnum2])
-        print("Future: " + file[randnum3])
-        input("Enter to Continue... ")
-        os.system('cls' if os.name == 'nt' else 'clear')
-        run()
+        elif int(game) == 2:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("Your Question For The Universe: " + self.question + '\n')
+            print("Shuffling Deck... ")
+            time.sleep(5)
+            randnum2 = random.randint(0, 21)
+            randnum3 = random.randint(0, 21)
+            if randnum2 == self.randnum:
+                randnum2 = random.randint(0, 21)
+                randnum3 = random.randint(0, 21)
+            if randnum3 == self.randnum or randnum3 == randnum2:
+                randnum3 = random.randint(0, 21)
 
-    elif int(game) == 3:
-        fourcard()
+            print("Past: " + self.file[self.randnum])
+            print("Present: " + self.file[randnum2])
+            print("Future: " + self.file[randnum3])
+            input("Enter to Continue... ")
+            os.system('cls' if os.name == 'nt' else 'clear')
+            self.run()
 
-def run():
-    global randnum, randnum0, question
-    randnum0 = random.randint(1, 22)
-    randnum = random.randint(1, 22)
-    question = input("What Must You Know?: ")
-    def comp():
-        game = input("What Reading Do You Want?: \n 1: Single Card \n 2: Past, Present, Future \n 3: 4-Card Spread \n Selection: ")
+        elif int(game) == 3:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            os.system('cls' if os.name == 'nt' else 'clear')
+            self.fourcard()
+
+    def run(self):
+        global randnum, randnum0
+        self.randnum0 = random.randint(0, 21)
+        self.randnum = random.randint(0, 21)
+        self.question = input("What Must You Know?: ")
+        self.comp()
+
+    def comp(self):
+        game = input(
+            "What Reading Do You Want?: \n 1: Single Card \n 2: Past, Present, Future \n 3: 4-Card Spread \n Selection: ")
         if game.isdigit() is False:
             if game.lower() == 'q' or game.lower() == 'quit':
                 pass
             else:
                 os.system('cls' if os.name == 'nt' else 'clear')
                 print("Numbers ONLY!")
-                comp()
-        elif int(game) <= 3:
-            check(game)
+                return self.comp()
+        elif int(game) <= 3 or int(game) >= 1:
+            self.check(game)
         elif int(game) >= 3:
             os.system('cls' if os.name == 'nt' else 'clear')
             print("Only Numbers 1-3...  ")
-            comp()
+            return self.comp()
+        else:
+            print("Restarting...  ")
+            return self.comp()
+
+    def fourcard(self):
+        def choicenum1():
+            global randnum2
+            randnum2 = random.randint(0, 21)
+            time.sleep(1)
+            print("Shuffling... ")
+            time.sleep(5)
+            print(self.file[randnum2])
+            choice = input("Do You Like Your Card?: ").lower()
+            if choice == 'yes' or choice == 'y':
+                self.mycards.append("First Card: " + self.file[randnum2])
+                choicenum2()
+
+            elif choice == 'no' or choice == 'n':
+                os.system('cls' if os.name == 'nt' else 'clear')
+                return choicenum1()
+
+        def choicenum2():
+            global randnum3
+            randnum3 = random.randint(0, 21)
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("Shuffling... ")
+            time.sleep(5)
+            print(self.file[randnum3])
+            choice2 = input("Do you like this card?: ").lower()
+            if choice2 == 'yes' or choice2 == 'y':
+                self.mycards.append("Second Card: " + self.file[randnum2])
+                choicenum3()
+
+            elif choice2 == 'no' or choice2 == 'n':
+                os.system('cls' if os.name == 'nt' else 'clear')
+                return choicenum2()
+
+        def choicenum3():
+            global randnum4
+            randnum4 = random.randint(0, 21)
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("Shuffling... ")
+            time.sleep(5)
+            print(self.file[randnum4])
+            choice3 = input("How About This Card?: ").lower()
+            if choice3 == 'yes' or choice3 == 'y':
+                self.mycards.append("Third Card: " + self.file[randnum3])
+                choicenum4()
+
+            elif choice3 == 'no' or choice3 == 'n':
+                os.system('cls' if os.name == 'nt' else 'clear')
+                return choicenum3()
+
+        def choicenum4():
+            global randnum5
+            randnum5 = random.randint(0, 21)
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("Shuffling... ")
+            time.sleep(5)
+            print(self.file[randnum5])
+            choice4 = input("What about this last card?:  ")
+            if choice4 == 'yes' or choice4 == 'y':
+                self.mycards.append("Last Card: " + self.file[randnum4])
+                os.system('cls' if os.name == 'nt' else 'clear')
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print(self.mycards[0] + '\n')
+                print(self.mycards[1] + '\n')
+                print(self.mycards[2] + '\n')
+                print(self.mycards[3] + '\n')
+                print("^ Cards Above...  ^")
+                input("Press Any Key To Continue...  ")
+                os.system('cls' if os.name == 'nt' else 'clear')
+                self.run()
+
+            elif choice4 == 'no' or choice4 == 'n':
+                return choicenum4()
+
+        choicenum1()
 
 
-    comp()
-
-
-
-def fourcard():
-    with open("tarotcards.txt") as f:
-        for line in f.readlines():
-            file.append(line)
-            def rerun(selection):
-                print("Shuffling... ")
-                time.sleep(5)
-                if randnum0 != selection:
-                    print(file[selection])
-
-                elif randnum0 == selection:
-                    pass
-
-            rerun(randnum)
-
-            def choicenum1():
-                global randnum2
-                choice = input("Do You Like Your Card?: ").lower()
-                randnum2 = random.randint(1, 22)
-                if choice == 'yes' or choice == 'y':
-                    print("Shuffling... ")
-                    time.sleep(5)
-                    mycards.append("First Card: " + file[randnum])
-                    print(file[randnum2])
-                    choicenum2()
-
-                elif choice == 'no' or choice == 'n':
-                    rerun(randnum2)
-                    choicenum1()
-
-            def choicenum2():
-                global randnum3
-                choice2 = input("Do you like this card?: ").lower()
-                randnum3 = random.randint(1, 22)
-                if choice2 == 'yes' or choice2 == 'y':
-                    print("Shuffling... ")
-                    time.sleep(5)
-                    mycards.append("Second Card: " + file[randnum2])
-                    print(file[randnum3])
-                    choicenum3()
-
-                elif choice2 == 'no' or choice2 == 'n':
-                    rerun(randnum3)
-                    choicenum2()
-
-            def choicenum3():
-                global randnum4
-                choice3 = input("How About This Card?: ").lower()
-                randnum4 = random.randint(1, 22)
-                if choice3 == 'yes' or choice3 == 'y':
-                    print("Shuffling... ")
-                    time.sleep(5)
-                    mycards.append("Third Card: " + file[randnum3])
-
-                    print(file[randnum4])
-                    choicenum4()
-
-                elif choice3 == 'no' or choice3 == 'n':
-                    rerun(randnum3)
-
-            def choicenum4():
-                choice4 = input("What about this last card?")
-                if choice4 == 'yes' or choice4 == 'y':
-                    mycards.append("Last Card: " + file[randnum4])
-                    os.system('cls' if os.name == 'nt' else 'clear')
-                    print(mycards[0] + '\n')
-                    print(mycards[1] + '\n')
-                    print(mycards[2] + '\n')
-                    print(mycards[3] + '\n')
-                    run()
-
-                elif choice4 == 'no' or choice4 == 'n':
-                    rerun(randnum4)
-
-            choicenum1()
-
-
-run()
+if __name__ == "__main__":
+    app = App()
+    app.run()
