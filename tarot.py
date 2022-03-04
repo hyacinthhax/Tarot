@@ -135,6 +135,10 @@ class App:
                 self.mycards.append("Last Card: " + self.file[randnum4])
                 os.system('cls' if os.name == 'nt' else 'clear')
                 os.system('cls' if os.name == 'nt' else 'clear')
+                print("Your Cards:  ")
+                for names in self.mycards:
+                    print(names.split(':')[1])
+                print('\n')
                 print(self.mycards[0] + '\n')
                 print(self.mycards[1] + '\n')
                 print(self.mycards[2] + '\n')
