@@ -59,7 +59,7 @@ class App:
             "What Reading Do You Want?: \n 1: Single Card \n 2: Past, Present, Future \n 3: 4-Card Spread \n Selection: ")
         if game.isdigit() is False:
             if game.lower() == 'q' or game.lower() == 'quit':
-                pass
+                quit()
             else:
                 os.system('cls' if os.name == 'nt' else 'clear')
                 print("Numbers ONLY!")
